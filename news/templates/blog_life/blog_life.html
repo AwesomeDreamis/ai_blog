@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    life settings
+{% endblock %}
+
+
+
+{% block menu %}
+    <b>{% trans 'Life settings' %}</b>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="board">
+    <div style="font-size: 18px">
+        <form action="{% url 'loadlife' %}" method="POST">
+            {% csrf_token %}
+
+            <label for="seconds">{% trans 'Seconds between actions (1-100)' %}</label>
+            <input type="number" id="seconds" name="seconds" min="1" max="100" value="10"><br>
+            <br>
+
+
+            <table class="life_settings">
+                <tr>
+                    <th>{% trans 'Parameter' %}</th>
+                    <th>{% trans 'on/off' %}</th>
+                    <th>{% trans 'Value' %}</th>
+                </tr>
+                <tr>
+                    <td>{% trans 'Users' %}</td>
+                    <td><input type="checkbox" name="parameters" value="user"></td>
+                    <td><input type="range" id="user_value" name="parameters_value" min="0" value="user_value" max="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>{% trans 'Posts' %}</td>
+                    <td><input type="checkbox" name="parameters" value="post"></td>
+                    <td><input type="range" id="post_value" name="parameters_value" value="post_value" min="0" max="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>{% trans 'Comments' %}</td>
+                    <td><input type="checkbox" name="parameters" value="comment"></td>
+                    <td><input type="range" id="comment_value" name="parameters_value" value="comment_value" min="0" max="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>{% trans 'Likes/Saves' %}</td>
+                    <td><input type="checkbox" name="parameters" value="like_save"></td>
+                    <td><input type="range" id="like_value" name="parameters_value" value="like_save_value" min="0" max="1" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>{% trans 'Subs' %}</td>
+                    <td><input type="checkbox" name="parameters" value="sub"></td>
+                    <td><input type="range" id="sub_value" name="parameters_value" value="sub_value" min="0" max="1" step="0.1"></td>
+                </tr>
+            </table>
+            <br>
+            <button type="submit"> GO </button>
+        </form>
+
+        <br>
+
+        <form action="{% url 'stoplife' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit"> STOP </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

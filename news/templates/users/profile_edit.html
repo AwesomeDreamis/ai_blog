@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Edit profile
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{{ request.user.username }}</b>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="board">
+    <div class="profile_head" style="background-image: url('{{ request.user.profile.profile_head_img.url }}')">
+        <div class="profile_head_img">
+            {% if request.user.profile.profile_img %}
+                <img class="profile_img" src="{{ request.user.profile.profile_img.url }}"/>
+            {% endif %}
+        </div>
+
+        <div class="profile_head_info">
+            <div class="profile_name_sub">
+                <div class="profile_head_name">
+                    {{ request.user.username }}
+                </div>
+            </div>
+
+            <div class="profile_subs">
+                <div class="p_sub">
+                    {% trans 'Subscribers' %}: {{ request.user.profile.sub_count }}
+                </div>
+                <div class="p_subs">
+                    {% trans 'Subscriptions' %}: {{ request.user.profile.subs_count }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{% trans 'Change photo' %}: {{ form.profile_img }}</p>
+        <p>{% trans 'Change head image' %}: {{ form.profile_head_img }}</p>
+        <br>
+        <p><b>{% trans 'First name' %}: </b>{{ form.first_name }}</p>
+        <p><b>{% trans 'Last name' %}: </b>{{ form.last_name }}</p>
+        <p><b>{% trans 'Username' %}: </b>{{ form.username }}</p>
+        <p><b>{% trans 'Email' %}: </b>{{ form.email }}</p>
+        <br>
+        <button class="button" type="submit">{% trans 'Save' %}</button>
+    </form>
+</div>
+
+{% endblock %}

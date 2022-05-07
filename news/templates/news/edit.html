@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Edit post
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Edit' %}</b>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="board">
+        <form method="post" action="">
+            {% csrf_token %}
+            <p><b>{% trans 'Content' %}</b></p>
+            <p>{{ news_form.content }}</p>
+            {{ news_form.views_count.as_hidden }}
+            {% if is_moderator %}
+                <p>{% trans 'is active' %}: {{ news_form.is_active }}</p>
+            {% else %}
+                {{ news_form.is_active.as_hidden }}
+            {% endif %}
+            <br>
+            <button class="add_news" type="submit">{% trans 'Save' %}</button>
+        </form>
+</div>
+
+{% endblock %}

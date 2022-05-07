@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Upload file
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Upload posts' %}</b>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="board">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p }}
+        <button type="submit">Загрузить файл</button>
+    </form>
+</div>
+
+{% endblock %}

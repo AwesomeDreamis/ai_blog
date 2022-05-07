@@ -1,0 +1,65 @@
+v/* list_news ------------------------------------------------------------------------- */
+
+.filters {
+    margin-top: 10px;
+}
+
+.news_list li {
+    list-style-type: none;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.news_list ul {
+    margin-left: 0; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере F */
+}
+
+.news_author_img_block {
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 50px;
+}
+
+.news_author_img {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border: 2px solid grey;
+    border-radius: 50px;
+}
+
+.news_author_content_block {
+    display: inline-block;
+    color: grey;
+}
+
+.news_author {
+    font-size: 20px;
+    color: black;
+}
+
+.news_text_block {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.news_text {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.news_content {
+    font-size: 16px;
+}
+
+.news_list_info {
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.news_list_info_img {
+    width: 25px;
+    margin-right: 10px;
+    vertical-align: middle;
+}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Blog
+{% endblock %}
+
+
+
+{% block menu %}
+    <b>{% trans 'Blog' %}</b>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="board">
+    <div class="profile_head" style="background-image: url('{{ user.profile.profile_head_img.url }}')">
+        <div class="profile_head_img">
+            {% if user.profile.profile_img %}
+                <img class="profile_img" src="{{ user.profile.profile_img.url }}"/>
+            {% endif %}
+        </div>
+
+        <div class="profile_head_info">
+            <div class="profile_name_sub">
+                <div class="profile_head_name">
+                    {{ user.username }}
+                </div>
+
+                <div class="sub-section">
+                    {% if request.user != user %}
+                        {% include 'functions/subscribe_section.html' %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="profile_subs">
+                <div class="p_sub">
+                    <a href="{% url 'subscribers_list' pk=user.id %}">{% trans 'Subscribers' %}: {{ user.profile.sub_count }}</a>
+                </div>
+                <div class="p_subs">
+                    {% if request.user == user %}
+                        <a href="{% url 'subscriptions_list' %}">{% trans 'Subscriptions' %}: {{ user.profile.subs_count }}</a>
+                    {% else %}
+                        <b>{% trans 'Subscriptions' %}: {{ user.profile.subs_count }}</b>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="news_list">
+        <ul>
+            {% for post in all_posts %}
+                <li>
+                    <div class="news_author_img_block">
+                        <a href="{% url 'user_blog' pk=user.id %}"><img class="news_author_img" src="{{ post.author.profile.profile_img.url }}"></a>
+                    </div>
+
+                    <div class="news_author_content_block">
+                        <a class="news_author" href="{% url 'user_blog' pk=user.id %}">{{ post.author }}</a>
+                        {{ post.created_at|date:"M d, Y" }}
+                        {% if post.created_at|date:"M d, Y" != post.updated_at|date:"M d, Y" %}
+                            {% trans "Edit" %}: {{ post.updated_at|date:"M d, Y" }}
+                        {% endif %}
+                        <br>
+
+                        <div class="news_text_block">
+                            <a class="news_text" href="{% url 'news_detail' pk=post.id %}">{{ post.content|truncatechars:150 }}</a>
+                        </div>
+
+
+                        <div class="news_list_info">
+
+                            <div class="like-section">
+                                {% include 'functions/like_section.html' %}
+                            </div>
+
+
+                            <div class="view-section">
+                                <img class="news_list_info_img" src="{% static 'img/views.png' %}">{{ post.views_count }}
+                            </div>
+                            <div class="comment-section">
+                                <img class="news_list_info_img" src="{% static 'img/comments.png' %}">{{ post.comment_news.all.count }}
+                            </div>
+
+                            {% if post.images_set.all %}
+                                <div class="images-section">
+                                    <img class="news_list_info_img" src="{% static 'img/news_list_img_info.png' %}">{{ post.images_set.count }}
+                                </div>
+                            {% endif %}
+
+
+                            <div class="save-section">
+                                {% include 'functions/save_section.html' %}
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <br>
+            {% empty %}
+                {% if request.user == user %}
+                    <p>{% trans "You have not published any post" %}</p>
+                    <br>
+                    <p><a class="add_news" href="{% url 'create' %}">{% trans "+ Add post" %}</a></p>
+                {% else %}
+                    <p>{{ user }} {% trans "has no posts yet" %}</p>
+                {% endif %}
+                <br>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if all_posts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ all_posts.number }} of {{ all_posts.paginator.num_pages }}.
+            </span>
+
+            {% if all_posts.has_next %}
+                <a href="?page={{ all_posts.next_page_number }}">next</a>
+                <a href="?page={{ all_posts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+</div>
+
+{% endblock %}

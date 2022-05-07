@@ -1,0 +1,58 @@
+.news_info_likes {
+    display: inline-block;
+}
+
+.like-section {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#like_button {
+    vertical-align: middle;
+    border: none !important;
+    border-radius: 5px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+#like_count {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.like_image {
+    vertical-align: middle;
+    width: 30px;
+}
+
+
+.view-section {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.comment-section {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.images-section {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.save-section {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#save_button {
+    margin-top: -10px;
+    vertical-align: middle;
+    border: none !important;
+    border-radius: 5px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}

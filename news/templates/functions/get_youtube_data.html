@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Search videos
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Search videos' %}</b>
+{% endblock %}
+
+
+
+
+{% block content %}
+<div class="board">
+    <div class="target_search">
+        <form action="{% url 'youtube_data' %}" method="get" class="target_search_form">
+            {% csrf_token %}
+            <input class="target_search_search" name="youtube_channel" type="text" placeholder='{% trans "Search..." %}'>
+        </form>
+    </div>
+    <br>
+    <br>
+    {% for id, title in data.items %}
+    <a href="https://www.youtube.com/watch?v={{ id }}">{{ title }}</a>
+    <br>
+    <br>
+    {% endfor %}
+
+</div>
+{% endblock %}

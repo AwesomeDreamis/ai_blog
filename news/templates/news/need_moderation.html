@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Suspicious posts
+{% endblock %}
+
+
+
+{% block menu %}
+    <b>{% trans 'Need to moderate' %}</b>
+{% endblock %}
+
+
+
+{% block content %}
+    {{ all_posts }}
+{% endblock %}

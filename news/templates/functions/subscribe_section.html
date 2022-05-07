@@ -1,0 +1,20 @@
+{% load static %}
+{% load i18n %}
+
+{% if request.user.is_authenticated %}
+    <form action="{% url 'subscribe' %}" method="POST" class="sub_info" id="{{ user.id }}">
+        {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+
+        {% if request.user in user.profile.subscribers.all %}
+            <button style="background-color: #ffffff" class="sub-btn{{ user.id }}" id="sub_button" type="submit">
+            Unsubscribe</button>
+        {% else %}
+            <button style="background-color: #299fff; color: #ffffff" class="sub-btn{{ user.id }}" id="sub_button" type="submit">
+            Subscribe</button>
+        {% endif %}
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">{% trans 'Subscribe' %}</a>
+{% endif %}
+

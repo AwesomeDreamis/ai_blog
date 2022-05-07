@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load i18n %}
+
+<head>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/like_and_save.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/news_list.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/news_detail.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/subs.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/life_settings.css' %}" type="text/css">
+
+    <meta charset="UTF-8">
+
+    <title>
+        {% block title %}
+        title
+        {% endblock %}
+    </title>
+</head>
+
+
+
+
+
+
+
+<body>
+
+    <div class="container">
+
+        <div class="left-panel">
+            <div class="left-content">
+                <div class="profile_menu">
+                    {% if request.user.is_authenticated %}
+                        <div class="user_info">
+                            <div class="dropdown">
+                                <div class="main_user_info">
+                                    <div class="main_user_img_block">
+                                        <a href="{% url 'user_blog' pk=request.user.id %}">
+                                            {% if request.user.profile %}
+                                                <img class="main_user_img" src="{{ request.user.profile.profile_img.url }}">
+                                            {% else %}
+                                                <img class="main_user_img" src="{% static 'img/default_images/defaultuser.png' %}">
+                                            {% endif %}
+                                            <div class="main_user_name">{{ request.user.username }}</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown-content">
+                                    <a href="{% url 'profile' pk=request.user.id %}">{% trans "Profile" %}</a>
+                                    <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <p><a href="{% url 'subscriptions' %}"><img class="menu_img" src="{% static 'img/home.png' %}">{% trans "Home" %}</a></p>
+                        <p><a class="back_to_main" href="{% url 'news_list'  %}"><img class="menu_img" src="{% static 'img/hashtag.png' %}">{% trans "Explore" %}</a></p>
+                        <p><a href="{% url 'user_blog' pk=request.user.id %}"><img class="menu_img" src="{% static 'img/blog.png' %}">{% trans "My blog" %}</a></p>
+                        <p><a href="{% url 'bookmarks' %}"><img class="menu_img" src="{% static 'img/bookmarks.png' %}">{% trans "Saved" %}</a></p>
+                        {% if request.user.username == 'admin' %}
+                            <p><a style="color: #af2121" href="{% url 'need_moderation' %}">{% trans "Reported posts" %}</a></p>
+                            <p><a style="color: #af2121" href="{% url 'blog_life' %}">{% trans "Blog life" %}</a></p>
+                            <p><a style="color: #af2121" href="{% url 'youtube_data' %}">{% trans "Youtube API data" %}</a></p>
+                        {% endif %}
+                        <br>
+                        <p><a class="add_news" href="{% url 'create' %}">{% trans "+ add post" %}</a></p>
+                    {% else %}
+                        <p><a class="back_to_main" href="{% url 'news_list'  %}"><img class="menu_img" src="{% static 'img/hashtag.png' %}">{% trans "Explore" %}</a></p>
+                        <p><a href="{% url 'login' %}">{% trans "Login" %}</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="middle-panel">
+            <div class="menu">
+                <script>
+                      if (history.length > 1) {
+                        document.write('<a  href="javascript:history.back()"> ← </a>');
+                      }
+                </script>
+                {% block menu %}
+                    menu
+                {% endblock %}
+            </div>
+            {% block content %}
+                content
+            {% endblock %}
+        </div>
+
+
+
+
+
+        <div class="right-panel">
+            <div class="right-content">
+                <div class="other">
+                    <form action="{% url 'news_list' %}" method="get">
+                        <input class="search" name="q" type="text" placeholder='{% trans "Search..." %}'>
+                    </form>
+                </div>
+
+
+                <div class="lang_change">
+                    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <select class="lang_change_from" name="language">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                    {{ language.name_local }} ({{ language.code }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <input class="lang_change_from" type="submit" value="Go">
+                    </form>
+                </div>
+
+                <div class="site_info">
+                    <a class="site_info_a" href="{% url 'about'  %}">{% trans 'About' %}</a>
+                    <br>
+                    <a class="site_info_a" href="{% url 'contacts'  %}">{% trans 'Contacts' %}</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $( document ).ready(function() {
+        $('.news_info_likes').submit(function(e){
+            e.preventDefault()
+
+            const post_id = $(this).attr('id')
+            const likeText = $(`.like-btn${post_id}`).text()
+            const likeValue = $(`.like-btn${post_id}`).val()
+            const trim = $.trim(likeValue)
+            const url = $(this).attr('action')
+
+            let res;
+            const likes = $(`.like-count${post_id}`).text()
+            const trimCount = parseInt(likes)
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    'post_id':post_id,
+
+                },
+                success: function(response) {
+                    if(trim === 'liked') {
+                        $(`.like-btn${post_id}`).text('❤').val('unliked').css('color', '#ffffff').css('font-size', '25px').css('-webkit-text-stroke-width', '2px').css('-webkit-text-stroke-color', '#000000')
+
+                        res = trimCount - 1
+                        console.log(post_id, likeText, res)
+                    } else {
+                        $(`.like-btn${post_id}`).text('❤').val('liked').css('color', '#ff3a40').css('font-size', '30px').css('-webkit-text-stroke-width', '0').css('-webkit-text-stroke-color', '#ffffff')
+
+                        res = trimCount + 1
+                        console.log(post_id, likeText, res)
+                    }
+
+                    $(`.like-count${post_id}`).text(res)
+                },
+                error: function(response) {
+                    console.log('error', response)
+                }
+            })
+
+        })
+    });
+</script>
+
+
+
+<script>
+    $( document ).ready(function() {
+        $('.news_info_saves').submit(function(e){
+            e.preventDefault()
+
+            const post_id = $(this).attr('id')
+            const saveText = $(`.save-btn${post_id}`).text()
+            const trim = $.trim(saveText)
+            const url = $(this).attr('action')
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    'post_id':post_id,
+                },
+                success: function(response) {
+                    if(trim === '☆') {
+                        $(`.save-btn${post_id}`).text('★').css('color', '#000000')
+                        console.log(post_id, saveText)
+                    } else {
+                        $(`.save-btn${post_id}`).text('☆').css('color', '#262626')
+                        console.log(post_id, saveText)
+                    }
+                },
+                error: function(response) {
+                    console.log('error', response)
+                }
+            })
+
+        })
+    });
+</script>
+
+
+
+
+<script>
+    $( document ).ready(function() {
+        $('.sub_info').submit(function(e){
+            e.preventDefault()
+
+            const user_id = $(this).attr('id')
+            const saveText = $(`.sub-btn${user_id}`).text()
+            const trim = $.trim(saveText)
+            const url = $(this).attr('action')
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    'user_id':user_id,
+                },
+                success: function(response) {
+                    if(trim === 'Unsubscribe') {
+                        $(`.sub-btn${user_id}`).text('Subscribe').css('background-color', '#299fff').css('color', '#ffffff')
+                        console.log(user_id, saveText)
+                    } else {
+                        $(`.sub-btn${user_id}`).text('Unsubscribe').css('background-color', '#ffffff').css('color', '#000000')
+                        console.log(user_id, saveText)
+                    }
+                },
+                error: function(response) {
+                    console.log('error', response)
+                }
+            })
+
+        })
+    });
+</script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+      var scrollbar = document.body.clientWidth - window.innerWidth + 'px';
+      console.log(scrollbar);
+      document.querySelector('[href="#openModal"]').addEventListener('click',function(){
+        document.body.style.overflow = 'hidden';
+        document.querySelector('#openModal').style.marginLeft = scrollbar;
+      });
+      document.querySelector('[href="#close"]').addEventListener('click',function(){
+        document.body.style.overflow = 'visible';
+        document.querySelector('#openModal').style.marginLeft = '0px';
+      });
+    });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+/* detail_news ------------------------------------------------------------------------- */
+
+.news_content {
+    width: 560px;
+    height: auto; /* Размеры */
+    background: #dcdcdc; /* Цвет фона */
+    /* outline: 2px solid #000; /* Чёрная рамка */
+    /*border: 3px solid #fff; /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+    padding: 10px;
+}
+
+.news_img {
+    display: inline-block;
+    max-width: 540px;
+}
+
+.news_author_info {
+    color: #808080;
+    display: inline-block;
+}
+
+.news_action {
+    display: inline-block;
+}
+
+.news_info {
+    color: #808080;
+}
+
+.news_info_img {
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 30px;
+    opacity: 0.7;
+}
+
+.comment_author {
+    color: #808080;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown_post {
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown_post_content {
+    background-color: #d5d5d5;
+    display: none;
+    position: absolute;
+    width: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown_post_content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown_post_content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown_post:hover .dropdown_post_content {display: block;}
+
+
+/* comments ------------------------------------------------------------------------- */
+
+.comments_list {
+}
+
+
+.comments_block {
+    position: fixed;
+    display: inline-block;
+    bottom: 0;
+    padding: 10px;
+    width: 550px;
+    background-color: #d7d7d7;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-weight: bold;
+    color: #000000;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content_comment {
+    background-color: #d5d5d5;
+    display: none;
+    position: absolute;
+    min-width: 100%;
+    z-index: 1;
+    margin-left: -10px;
+}
+
+/* Show the dropdown menu on hover */
+.comments_block:hover .dropdown-content_comment {display: block;}
+
+/* Links inside the dropdown */
+.dropdown-content_comment a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content_comment a:hover {background-color: #ddd;}
+
+
+
+.comment_author_block {
+    margin-bottom: 3px;
+}
+
+.comment_author_img {
+    object-fit: cover;
+    width: 20px;
+    height: 20px;
+    border: 2px solid grey;
+    border-radius: 100px;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.comment_content_block {
+    width: 90%;
+    margin-left: 22px;
+    margin-top: -5px;
+}
+
+.comment_img {
+    max-width: 300px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+.comment_button {
+    color: #ffffff; /* цвет текста */
+    text-decoration: none; /* убирать подчёркивание у ссылок */
+    font-weight: bold;
+    user-select: none; /* убирать выделение текста */
+    background-color: #299fff; /* фон кнопки */
+    padding: 10px 20px 10px 20px; /* отступ от текста */
+    outline: none; /* убирать контур в Mozilla */
+    border-radius: 10px;
+    border: none;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.comment_button:hover { /* при наведении курсора мышки */
+    color: #ffffff;
+    background: #017df1;
+}
+
+.comment_button:active { /* при нажатии */
+    color: #ffffff;
+    background: #0069ce;
+}
+
+
+
+.create_post_content {
+    margin-top: 5px;
+    border-radius: 10px;
+    height: 200px;
+    width: 100%;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    outline:none;
+}
+
+.create_comment_text {
+    margin-top: 5px;
+    border-radius: 10px;
+    height: 60px;
+    width: 100%;
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.create_comment_text:focus {
+    outline:none;
+}
+
+/* #comment-img {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1
+}
+
+.choose_file {
+    cursor: pointer;
+    margin-right: 10px;
+}
+.choose_file:hover {
+    color: #5d5d5d;
+}
+
+#note-image {
+} */

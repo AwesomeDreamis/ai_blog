@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Subscribers
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Subscribers' %}</b>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="board">
+    <div class="target_search">
+        <form action="{% url 'subscribers_list' pk=user.id %}" method="get" class="target_search_form">
+            {% csrf_token %}
+            <input class="target_search_search" name="search" type="text" placeholder='{% trans "find sub..." %}'>
+        </form>
+    </div>
+
+    <ul style="margin-left: 0; padding-left: 0;">
+        {% for user in data %}
+            <li style="list-style-type: none">
+                {% if user.profile.profile_img %}
+                    <div class="sub_user_img_block">
+                        <a href="{% url 'user_blog' pk=user.id %}">
+                            <img class="sub_user_img" src="{{ user.profile.profile_img.url }}">
+                        </a>
+                    </div>
+                {% endif %}
+
+                <div class="sub_user_content_block">
+                    <a class="sub_user_name" href="{% url 'user_blog' user.id %}">{{ user }}</a>
+                    <div class="sub_user_sub">{% include 'functions/subscribe_section.html' %}</div>
+                </div>
+            </li>
+            <br>
+        {% empty %}
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if data.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ data.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ data.number }} of {{ data.paginator.num_pages }}.
+            </span>
+
+            {% if all_posts.has_next %}
+                <a href="?page={{ data.next_page_number }}">next</a>
+                <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Login
+{% endblock %}
+
+
+
+{% block menu %}
+    <b>{% trans 'Login' %}</b>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="board">
+    {% if form.errors %}
+        <p style="color: #c52525; font-weight: bold">{% trans 'username or password not correct' %}</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {% trans "Email or Username" %}<br>
+        {{ form.username }}
+        <br><br>
+        {% trans "Password" %}<br>
+        {{ form.password }}
+        <p>{% trans "First time on the site?" %} <a href="{% url 'register' %}">{% trans "Register" %}</a> </p>
+        <p>{% trans "or sing up with" %} <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a></p>
+
+
+        <button class="add_news" type="submit">{% trans "Login" %}</button>
+
+    </form>
+
+</div>
+
+{% endblock %}

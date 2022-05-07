@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load cache %}
+
+
+{% block title %}
+    About
+{% endblock %}
+
+
+
+{% block menu %}
+    <b>{% trans 'About' %}</b>
+{% endblock %}
+
+
+
+{% block content %}
+
+    {% cache 600 about_content %}
+        <div class="board">
+            info about our company
+        </div>
+    {% endcache %}
+
+{% endblock %}

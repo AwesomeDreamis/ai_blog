@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Delete post
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Delete' %}</b>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="board">
+    <form method="POST">
+        {% csrf_token %}
+        <p>{% trans 'Are you sure' %}?</p>
+        <button class="button">{% trans 'Yes' %}</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Register
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Register' %}</b>
+{% endblock %}
+
+
+
+{% block content %}
+
+<style>
+    [data-tooltip] {
+        position: relative; /* Относительное позиционирование */
+    }
+    [data-tooltip]::after {
+        content: attr(data-tooltip); /* Выводим текст */
+        position: absolute; /* Абсолютное позиционирование */
+        width: 300px; /* Ширина подсказки */
+        left: 0; top: 0; /* Положение подсказки */
+        background: #dddddd; /* Синий цвет фона */
+        color: #000000; /* Цвет текста */
+        padding: 0.5em; /* Поля вокруг текста */
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Параметры тени */
+        pointer-events: none; /* Подсказка */
+        opacity: 0; /* Подсказка невидима */
+        transition: 0s; /* Время появления подсказки */
+        white-space: pre-wrap;
+    }
+    [data-tooltip]:hover::after {
+        opacity: 1; /* Показываем подсказку */
+        top: 2em; /* Положение подсказки */
+    }
+</style>
+
+
+<div class="board">
+    {% for message in messages %}
+
+        <div class="alert alert-success">
+            <p style="color: #c52525; font-weight: bold">{{ message }}</p>
+        </div>
+
+    {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+
+        <p><b>{% trans "First name" %}<br> </b>{{ form.first_name }}</p>
+        <p><b>{% trans "Last name" %}<br> </b>{{ form.last_name }}</p>
+        <p><b>{% trans "Email" %}<span style="color: #d00c05">*</span><br> </b>{{ form.email }}</p>
+        <p><b>{% trans "Username" %}<span style="color: #d00c05">*</span><br> </b>{{ form.username }}</p>
+        <p class="tooltip" data-tooltip=
+            "Your password can't be too similar to your other personal information.
+            &#10;Your password must contain at least 8 characters.
+            &#10;Your password can't be a commonly used password.
+            &#10;Your password can't be entirely numeric.">
+            <b>{% trans "Password" %}<span style="color: #d00c05">*</span><br> </b>{{ form.password1 }}</p>
+        <p><b>{% trans "Confirm password" %}<span style="color: #d00c05">*</span><br> </b>{{ form.password2 }}</p>
+        <br>
+
+        <button class="add_news" type="submit">{% trans "Register" %}</button>
+    </form>
+</div>
+
+{% endblock %}

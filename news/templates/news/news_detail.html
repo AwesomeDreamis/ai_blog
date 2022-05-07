@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Post
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Post' %}</b>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="board">
+    <div class="news_container">
+        <div>
+            <div class="news_author_info">
+                <a href="{% url 'user_blog' pk=news.author.id %}">{{ post.author }}</a>,
+                {{ post.created_at }}
+                {% if post.created_at|date:"M d, Y" != post.updated_at|date:"M d, Y" %}
+                    {% trans 'Edit' %}: {{ post.updated_at }}
+                {% endif %}
+            </div>
+
+            <div class="news_action">
+                <div class="dropdown_post">
+                    <img class="news_info_img" src="{% static 'img/option.png'%}">
+                    <div class="dropdown_post_content">
+                        <a href=".">{% trans 'report' %}</a>
+                        {% if post.author == request.user or is_moderator == True %}
+                            <a href="{% url 'post_edit' profile_id=post.id %}">{% trans 'edit' %}</a>
+                            <a href="{% url 'post_delete' pk=post.id %}">{% trans 'delete' %}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="news_content">
+            <p>{{ post.content }}</p>
+            {% for image in post.images_set.all %}
+                <img class="news_img" src="../media/{{ image.image }}"/>
+                <br>
+            {% empty %}
+            {% endfor %}
+        </div>
+
+        <div class="news_list_info">
+            <div class="like-section">
+                {% include 'functions/like_section.html' %}
+            </div>
+
+
+            <div class="view-section">
+                <img class="news_list_info_img" src="{% static 'img/views.png' %}">{{ post.views_count }}
+            </div>
+            <div class="comment-section">
+                <img class="news_list_info_img" src="{% static 'img/comments.png' %}">{{ post.comment_news.all.count }}
+            </div>
+            {% if post.images_set.all %}
+                <div class="images-section">
+                    <img class="news_list_info_img" src="{% static 'img/news_list_img_info.png' %}">{{ post.images_set.count }}
+                </div>
+            {% endif %}
+
+
+            <div class="save-section">
+                {% include 'functions/save_section.html' %}
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+    <div class="comments_list">
+        <h3>{% trans 'Comments' %}</h3>
+        {% for comment in post.comment_news.all %}
+            <div class="comment_author_block">
+                <a class="comment_author" href="{% url 'user_blog' pk=comment.user.id %}">
+                  <img class="comment_author_img" src="{{ comment.user.profile.profile_img.url }}">{{ comment.user }}
+                </a>
+                {{ comment.created_at|date:"M d, Y" }}
+
+                <div class="news_action">
+                    <div class="dropdown_post">
+                        <img class="news_info_img" src="{% static 'img/option.png'%}">
+                        <div class="dropdown_post_content">
+                            <a href=".">{% trans 'report' %}</a>
+                            {% if comment.user == request.user or is_moderator == True %}
+                                <a href="{% url 'comment_delete' pk=comment.id %}">{% trans 'delete' %}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment_content_block">
+               {{ comment.text }}
+                <br>
+               {% if comment.image %}
+                    <img class="comment_img" src="../media/{{ comment.image }}"/>
+                {% endif %}
+            </div>
+            <br>
+        {% empty %}
+            {% trans 'There are no comments yet, be the first' %}
+        {% endfor %}
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="comments_block">
+
+        <div class="main_user_name">{% trans 'Add comment' %} ↑</div>
+
+        <div class="dropdown-content_comment">
+            <div class="comments_block">
+
+                {% if request.user.is_authenticated %}
+                    <form action="." method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.text }}<br>
+                        {{ form.image }}
+                        <button id="remove-file" type="button"> ✖ </button></p>
+                        <input class='comment_button' type="submit">
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">{% trans "Login" %}</a> {% trans 'to leave a comment' %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    document.getElementById('remove-file').onclick = function() {
+        var file = document.getElementById("comment-img");
+        file.value = file.defaultValue;
+    }
+</script>
+
+
+{% endblock %}

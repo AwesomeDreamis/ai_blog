@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load cache %}
+
+
+{% block title %}
+    Contacts
+{% endblock %}
+
+
+
+    {% block menu %}
+        <b>{% trans 'Contacts' %}</b>
+    {% endblock %}
+
+
+
+{% block content %}
+    {% cache 600 contacts_content %}
+        <div class="board">
+            contacts
+        </div>
+    {% endcache %}
+{% endblock %}
+

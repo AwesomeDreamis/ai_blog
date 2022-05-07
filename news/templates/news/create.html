@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Create post
+{% endblock %}
+
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Create' %}</b>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="board">
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.title.as_hidden }}
+        {{ form.author.as_hidden }}
+        {{ form.views_count.as_hidden }}
+
+        <p><b>{% trans 'Content' %}</b><br>
+        {{ form.content }}</p>
+
+        <p><b><label class="form-control-label" for="images">{% trans 'Images' %}</label></b><br>
+        <input class="form-control-file" type="file" name="images" id="note-image" placeholder="" multiple>
+        <button id="remove-file" type="button"> ✖ </button></p>
+
+        {% if is_moderator %}
+            <p>is active: {{ form.is_active }}</p>
+            <br>
+        {% else %}
+            {{ form.is_active.as_hidden }}
+        {% endif %}
+        <button class="add_news" type="submit">{% trans 'Make post' %}</button>
+    </form>
+</div>
+
+
+
+
+<script>
+    document.getElementById('remove-file').onclick = function() {
+        var file = document.getElementById("note-image");
+        file.value = file.defaultValue;
+    }
+</script>
+
+{% endblock %}

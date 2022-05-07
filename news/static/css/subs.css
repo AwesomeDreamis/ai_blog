@@ -1,0 +1,29 @@
+/* subs ------------------------------------------------------------------------- */
+
+.sub_user_img_block {
+    display: inline-block;
+    margin-right: 10px;
+}
+.sub_user_img {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border: 2px solid grey;
+    border-radius: 100px;
+    vertical-align: middle;
+}
+
+.sub_user_content_block {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.sub_user_name {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.sub_user_sub {
+    display: inline-block;
+    vertical-align: middle;
+}

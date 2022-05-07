@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    Bookmarks
+{% endblock %}
+
+
+
+
+{% block menu %}
+    <b>{% trans 'Bookmarks' %}</b>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="board">
+    <div class="news_list">
+        <ul>
+            {% for post in saved_posts %}
+                <li>
+                    <div class="news_author_img_block">
+                        {% if post.author.profile.profile_img %}
+                            <a href="{% url 'user_blog' pk=user.id %}"><img class="news_author_img" src="{{ post.author.profile.profile_img.url }}"></a>
+                        {% else %}
+                            <a href="{% url 'user_blog' pk=user.id %}"><img class="news_author_img" src="{% static 'default_images/defaultuser.png' %}"></a>
+                        {% endif %}
+                    </div>
+
+                    <div class="news_author_content_block">
+                        <a class="news_author" href="{% url 'user_blog' pk=post.author.id %}">{{ post.author }}</a>
+                        {{ post.created_at|date:"M d, Y" }}
+                        {% if post.created_at|date:"M d, Y" != post.updated_at|date:"M d, Y" %}
+                            {% trans "Edit" %}: {{ post.updated_at|date:"M d, Y" }}
+                        {% endif %}
+                        <br>
+
+                        <div class="news_text_block">
+                            <a class="news_text" href="{% url 'news_detail' pk=post.id %}">{{ post.content|truncatechars:150 }}</a>
+                        </div>
+
+
+                        <div class="news_list_info">
+                            <div class="like-section">
+                                {% include 'functions/like_section.html' %}
+                            </div>
+
+
+                            <div class="view-section">
+                                <img class="news_list_info_img" src="{% static 'img/views.png' %}">{{ post.views_count }}
+                            </div>
+                            <div class="comment-section">
+                                <img class="news_list_info_img" src="{% static 'img/comments.png' %}">{{ post.comment_news.all.count }}
+                            </div>
+                            {% if post.images_set.all %}
+                                <div class="images-section">
+                                    <img class="news_list_info_img" src="{% static 'img/news_list_img_info.png' %}">{{ post.images_set.count }}
+                                </div>
+                            {% endif %}
+
+
+                            <div class="save-section">
+                                {% include 'functions/save_section.html' %}
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <br>
+            {% empty %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+</div>
+
+{% endblock %}
