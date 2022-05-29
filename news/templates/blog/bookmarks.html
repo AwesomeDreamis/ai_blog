@@ -41,6 +41,32 @@
 
                         <div class="news_text_block">
                             <a class="news_text" href="{% url 'news_detail' pk=post.id %}">{{ post.content|truncatechars:150 }}</a>
+
+                            <div class="news_list_img_block">
+                                {% for image in post.images_set.all %}
+                                    <div class="list_img_inline" >
+                                        <a href="#{{ image.image }}"><img class="news_list_img" title="" src="/media/{{ image.image }}" alt="" /></a>
+
+
+                                        <a href="#x" class="overlay" id="{{ image.image }}"></a>
+
+
+                                        <div class="popup">
+                                            <img class="is-news_img" src="/media/{{ image.image }}" alt="" />
+                                            <a class="close" title="Закрыть" href="#close"></a>
+                                        </div>
+
+                                        <div class="caption">
+                                            <h3>
+                                            <a href="#"></a>
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                {% empty %}
+                                {% endfor %}
+                            </div>
+
                         </div>
 
 

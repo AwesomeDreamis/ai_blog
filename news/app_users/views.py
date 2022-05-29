@@ -59,6 +59,7 @@ class RegisterView(View):
 #         profile = self.get_object()
 #         return profile.user == self.request.user
 
+
 class ProfileView(View, UserPassesTestMixin):
     """Представление просмотра профиля"""
 
@@ -67,38 +68,19 @@ class ProfileView(View, UserPassesTestMixin):
             raise PermissionDenied
 
         user_data = User.objects.get(id=pk)
+        profile_data = user_data.profile
+        user_form = RegisterForm(instance=user_data)
+        profile_form = RegisterForm(instance=profile_data)
 
-        try:
-            profile_data = user_data.profile
-            user_form = RegisterForm(instance=user_data)
-            profile_form = RegisterForm(instance=profile_data)
+        if not request.user == user_data:
+            raise PermissionDenied()
 
-            if not request.user == user_data:
-                raise PermissionDenied()
-
-            return render(request, 'users/profile.html', context={'user_form': user_form,
-                                                                  'profile_form': profile_form,
-                                                                  'user': user_data,
-                                                                  'profile': profile_data,
-                                                                  'profile_id': pk,
-                                                                  })
-        except:
-            profile_data = Profile.objects.create(
-                user=user_data,
-            )
-            profile_data.save()
-            user_form = RegisterForm(instance=user_data)
-            profile_form = RegisterForm(instance=profile_data)
-
-            if not request.user == user_data:
-                raise PermissionDenied()
-
-            return render(request, 'users/profile.html', context={'user_form': user_form,
-                                                                  'profile_form': profile_form,
-                                                                  'user': user_data,
-                                                                  'profile': profile_data,
-                                                                  'profile_id': pk,
-                                                                  })
+        return render(request, 'users/profile.html', context={'user_form': user_form,
+                                                              'profile_form': profile_form,
+                                                              'user': user_data,
+                                                              'profile': profile_data,
+                                                              'profile_id': pk,
+                                                              })
 
 
 class ProfileUpdateView(View):

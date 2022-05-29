@@ -1,0 +1,73 @@
+/* comments ------------------------------------------------------------------------- */
+
+.add_post_block {
+    position: fixed;
+    display: inline-block;
+    bottom: 0;
+    padding: 10px;
+    width: 560px;
+    background-color: #299fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-weight: bold;
+    color: #000000;
+}
+
+
+
+.add_post_title {
+    color: white;
+    font-size: 20px;
+}
+
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content_add_post {
+    display: none;
+    position: absolute;
+    min-width: 100%;
+    z-index: 1;
+    margin-left: -10px;
+}
+
+/* Show the dropdown menu on hover */
+.add_post_block:hover .dropdown-content_add_post {display: block;}
+.add_post_block:focus  {display: block;}
+
+
+/*!* Links inside the dropdown *!*/
+/*.dropdown-content_add_post a {*/
+/*    padding: 12px 16px;*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*}*/
+
+/*!* Change color of dropdown links on hover *!*/
+/*.dropdown-content_add_post a:hover {background-color: #ddd;}*/
+
+
+
+.add_post_button {
+    color: #262626; /* цвет текста */
+    text-decoration: none; /* убирать подчёркивание у ссылок */
+    font-weight: bold;
+    user-select: none; /* убирать выделение текста */
+    background: #ffffff; /* фон кнопки */
+    padding: 15px; /* отступ от текста */
+    outline: none; /* убирать контур в Mozilla */
+    border: none;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+    font-size: 20px;
+    cursor: pointer;
+    width: 100%;
+}
+.add_post_button:hover { /* при наведении курсора мышки */
+    color: #262626;
+    background: #d2d2d2;
+}
+
+.add_post_button:active { /* при нажатии */
+    color: #262626;
+    background: #808080;
+}

@@ -41,7 +41,7 @@ v/* list_news ------------------------------------------------------------------
 
 .news_text_block {
     margin-top: 5px;
-    margin-bottom: 5px;
+    /*margin-bottom: -5px;*/
 }
 
 .news_text {
