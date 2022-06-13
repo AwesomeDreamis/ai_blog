@@ -14,10 +14,6 @@ import os
 from pathlib import Path
 import json
 
-# загрузка секретных ключей
-path = 'C:/Users/alexm/GitHub/Awesomedreamis/django_secrets/'
-with open(f'{path}tokens.json', encoding="utf-8") as file:
-    keys = json.loads(file.read())
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -120,23 +116,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'ai_blog',
-#         'USER': 'postgres',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ai_blog',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -162,9 +158,9 @@ AUTHENTICATION_BACKENDS = (
     'app_users.auth.EmailAuthBackend'
 )
 
-GOOGLE_DEVELOPER_KEY = keys['GOOGLE_DEVELOPER_KEY']
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = keys['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = keys['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
+GOOGLE_DEVELOPER_KEY = "AIzaSyDVRdWcRynf-yAKDDAcf91xLaukY9iGrt0"
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "1066731241498-3c4atbjft8hm9641872cv8r9vuleute1.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
 
 
 SOCIAL_AUTH_PIPELINE = (
@@ -239,6 +235,7 @@ LOGGING = {
     },
 }
 
-INTERNAL_IPS = [
-    '127.0.0.1',  # если на хостинге, то нужен домен
+INTERNAL_IPS = [  # если на хостинге, то нужен домен
+    '127.0.0.1',
+    '0.0.0.0',
 ]

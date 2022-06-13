@@ -7059,3 +7059,47 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\news\news\settings.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\news\news\settings.py changed, reloading.
+Watching for file changes with StatReloader
+file_cache is only supported with oauth2client<4.0.0
+Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: [WinError 10051] Сделана попытка выполнить операцию на сокете при отключенной сети
+Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: [WinError 10051] Сделана попытка выполнить операцию на сокете при отключенной сети
+Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: [WinError 10051] Сделана попытка выполнить операцию на сокете при отключенной сети
+Authentication failed using Compute Engine authentication due to unavailable metadata server.
+Internal Server Error: /blog/youtube_api/
+Traceback (most recent call last):
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\news\app_blog\views.py", line 160, in get
+    data = self.get_youtube_videos(query)
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\news\app_blog\views.py", line 170, in get_youtube_videos
+    youtube = googleapiclient.discovery.build(
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\googleapiclient\_helpers.py", line 131, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\googleapiclient\discovery.py", line 298, in build
+    service = build_from_document(
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\googleapiclient\_helpers.py", line 131, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\googleapiclient\discovery.py", line 576, in build_from_document
+    credentials = _auth.default_credentials(
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\googleapiclient\_auth.py", line 54, in default_credentials
+    credentials, _ = google.auth.default(scopes=scopes, quota_project_id=quota_project_id)
+  File "C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\env\lib\site-packages\google\auth\_default.py", line 579, in default
+    raise exceptions.DefaultCredentialsError(_HELP_MESSAGE)
+google.auth.exceptions.DefaultCredentialsError: Could not automatically determine credentials. Please set GOOGLE_APPLICATION_CREDENTIALS or explicitly create credentials and re-run the application. For more information, please see https://cloud.google.com/docs/authentication/getting-started
+Not Found: /favicon.ico
+C:\Users\alexm\GitHub\Awesomedreamis\ai_blog\news\news\settings.py changed, reloading.
+Watching for file changes with StatReloader

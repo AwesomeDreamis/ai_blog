@@ -67,7 +67,7 @@
                         {% if request.user.username == 'admin' %}
                             <p><a style="color: #af2121" href="{% url 'need_moderation' %}">{% trans "Reported posts" %}</a></p>
                             <p><a style="color: #af2121" href="{% url 'blog_life' %}">{% trans "Blog life" %}</a></p>
-                            <p><a style="color: #af2121" href="{% url 'youtube_data' %}">{% trans "Youtube API data" %}</a></p>
+{#                            <p><a style="color: #af2121" href="{% url 'youtube_data' %}">{% trans "Youtube API data" %}</a></p>#}
                         {% endif %}
                         <br>
                         <p><a class="add_news" href="{% url 'create' %}">{% trans "+ add post" %}</a></p>

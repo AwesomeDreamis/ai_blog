@@ -4,10 +4,11 @@ RUN mkdir /app
 
 COPY requirements.txt /app/
 
-COPY . ./app/
-
+RUN python -m pip install --upgrade pip
 RUN python -m pip install -r /app/requirements.txt
+
+COPY . ./app/
 
 WORKDIR /app/news/
 
-ENTRYPOINT ["python", "manage.py"]
+#ENTRYPOINT ["python", "manage.py", "runserver", "localhost:8000"]
