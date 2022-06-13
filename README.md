@@ -1,17 +1,20 @@
-# Блог на джанго с симуляцией жизни
+# Блог на джанго с "симуляцией жизни"
 
 Блог реализованный на джанго.
 
-### Установка
-
-```commandline
-pip install -r requirements.txt
-```
-
 ### Запуск
+#### Docker-compose
+- ```docker-compose up -d```
+- зайти на localhost:8000
+
+#### PyCharm
 - перейти в директорию приложения
 - активировать виртуальное окружение
-- запустить приложение
+- ```pip install -r requirements.txt```
+- перейти в директорию "news"
+- python manage.py runserver
+- зайти на localhost:8000
+
 
 ### Функция симуляции жизни
 Имя и Фамилия генерируются с помощью 'https://randomuser.me/api/'.
