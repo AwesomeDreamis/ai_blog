@@ -15,7 +15,7 @@ from pathlib import Path
 import json
 
 # загрузка секретных ключей
-path = 'C:/Users/alexm/Desktop/django_secrets/'
+path = 'C:/Users/alexm/GitHub/Awesomedreamis/django_secrets/'
 with open(f'{path}tokens.json', encoding="utf-8") as file:
     keys = json.loads(file.read())
 
