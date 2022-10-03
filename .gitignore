@@ -1,1 +1,5 @@
 /env/
+/data/
+/news/db.sqlite3
+/news/debug.log
+/news/info.log
