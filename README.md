@@ -2,18 +2,15 @@
 
 Блог реализованный на джанго.
 
-### Запуск
+### Установка
 #### Docker-compose
 - ```docker-compose up -d```
-- зайти на localhost:8000
 
 #### PyCharm
 - перейти в директорию приложения
-- активировать виртуальное окружение
 - ```pip install -r requirements.txt```
 - перейти в директорию "news"
-- python manage.py runserver
-- зайти на localhost:8000
+- ```python manage.py runserver```
 
 
 ### Функция симуляции жизни (только через терминал, при запуске через докер пока не работает)

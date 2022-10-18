@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a80aaebc-068e-4d17-8922-907eb843127c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/db/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/data/db/global/pg_control" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/db/pg_stat_tmp/global.stat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/db/pg_wal/000000010000000000000001" beforeDir="false" afterPath="$PROJECT_DIR$/data/db/pg_wal/000000010000000000000001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/db/postmaster.pid" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +22,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TestTaskFor_aisa" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
@@ -43,6 +40,8 @@
       <workItem from="1661976958566" duration="26961000" />
       <workItem from="1663332347960" duration="5828000" />
       <workItem from="1663954625902" duration="649000" />
+      <workItem from="1665157536747" duration="2093000" />
+      <workItem from="1666004649520" duration="2804000" />
     </task>
     <servers />
   </component>
